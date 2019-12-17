@@ -1,23 +1,59 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <b-container class="main" fluid>
+      <v-menu />
+      <router-view />
+      <v-footer />
+    </b-container>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+import Menu from "@/components/Menu.vue";
+import Footer from "@/components/Footer.vue";
+import Icon from "vue-awesome/components/Icon";
+import Datetime from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
+
+Vue.component("v-menu", Menu);
+Vue.component("v-footer", Footer);
+Vue.component("v-icon", Icon);
+Vue.use(Datetime)
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style>
+@import "bootstrap/dist/css/bootstrap.css";
+@import "bootstrap-vue/dist/bootstrap-vue.css";
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  margin: 0;
+  padding: 0;
+}
+
+.b-main-content {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.b-form-1 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-right: 0;
+  margin-left: 0;
+  border-width: 0.2rem;
 }
 </style>
