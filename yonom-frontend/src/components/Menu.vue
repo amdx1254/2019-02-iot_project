@@ -18,9 +18,6 @@
           }}</strong>
         </template>
         <b-row class="justify-content-md-center" style="margin:5px">
-          <b-dropdown-item to="/changePassword"
-            ><span class="nav-username">Change Password</span></b-dropdown-item
-          >
           <b-dropdown-item to="/signOut"
             ><v-icon name="sign-out-alt" /><span class="nav-username"
               >Sign Out</span
@@ -28,14 +25,6 @@
           >
         </b-row>
       </b-nav-item-dropdown>
-      <b-nav-item class="nav-btn" href="https://twitter.com/wolfeidau"
-        ><v-icon name="brands/twitter"
-      /></b-nav-item>
-      <b-nav-item
-        class="nav-btn"
-        href="https://github.com/wolfeidau/cognito-vue-bootstrap"
-        ><v-icon name="brands/github"
-      /></b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>

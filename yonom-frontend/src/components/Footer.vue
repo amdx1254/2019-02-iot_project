@@ -2,7 +2,7 @@
   <footer class="bd-footer">
     <b-container>
       <b-row class="justify-content-md-center">
-        <div class="bd-footer-copyright">© 2019, 잡았다 요놈..</div>
+        <div class="bd-footer-copyright">© 2019, 잡았다 요놈.</div>
       </b-row>
     </b-container>
   </footer>

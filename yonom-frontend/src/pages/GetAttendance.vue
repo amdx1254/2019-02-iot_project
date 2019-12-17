@@ -26,7 +26,7 @@
               <td>{{ item.lecture_name }}</td>
               <td>{{ item.classroom }}</td>
               <td>{{ item.start_time }}</td>
-              <td>{{ item.weekday }}</td>
+              <td><li v-bind:key=i v-for="i in item.weekday"> {{ i }}</li></td>
               <td>{{ item.professor }}</td>
               <!-- and so on -->
             </tr>
@@ -34,7 +34,7 @@
         </table>
         <b-modal size="xl" scrollable ref="att-modal" hide-footer title="출결 상황">
           <div class="d-block text-center">
-            <table class="table-hover" v-if="data">
+            <table class="table-hover" v-if="data != null">
               <thead>
                 <tr>
                   <th>학생</th>
@@ -140,6 +140,7 @@ export default {
           lecture_id
       });
       this.data = response.data.body;
+      if(response.data.body == []) this.data=null;
       this.selected_lecture = lecture_id;
       this.$refs["att-modal"].show();
     },
