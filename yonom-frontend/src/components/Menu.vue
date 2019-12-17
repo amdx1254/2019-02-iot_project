@@ -3,11 +3,9 @@
     <b-navbar-toggle target="nav_collapse" />
     <b-navbar-brand to="/">잡았다 요놈.</b-navbar-brand>
     <b-navbar-nav>
-      <b-nav-item to="/dashboard">Dashboard</b-nav-item>
       <b-nav-item to="/getatt">출석부조회</b-nav-item>
       <b-nav-item to="/getcanceledlecture">휴강조회</b-nav-item>
       <b-nav-item to="/getaddedlecture">보강조회</b-nav-item>
-      <b-nav-item to="/changeatt">출결수정</b-nav-item>
     </b-navbar-nav>
     <b-navbar-nav class="ml-auto">
       <b-nav-item v-if="!isAuthenticated" class="nav-btn" to="/signIn"

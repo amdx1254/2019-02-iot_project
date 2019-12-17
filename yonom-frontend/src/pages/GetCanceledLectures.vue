@@ -39,6 +39,7 @@
 <script>
 import { mapState } from "vuex";
 import axios from "axios";
+import Cookies from 'js-cookie';
 export default {
   name: "HelloWorld2",
   data() {
@@ -56,6 +57,10 @@ export default {
     })
   },
   created() {
+    var access_token = Cookies.get('access_token');
+    var id_token = Cookies.get('idtoken');
+    axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`;
+    axios.defaults.headers.common['access_token'] = `${access_token}`;
     this.getuserinfo();
     this.get_canceled_lectures();
   },
@@ -135,4 +140,13 @@ a {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
 </style>

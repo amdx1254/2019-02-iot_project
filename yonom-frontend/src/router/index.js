@@ -1,14 +1,13 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/pages/Home.vue";
-import Dashboard from "@/pages/Dashboard.vue";
 import SignIn from "@/pages/auth/SignIn.vue";
 import SignOut from "@/pages/auth/SignOut.vue";
 import GetAttendance from "@/pages/GetAttendance.vue";
 import GetCanceledLectures from "@/pages/GetCanceledLectures.vue";
 import GetAdditionalLectures from "@/pages/GetAdditionalLectures.vue";
 import store from "@/store";
-
+import Cookies from 'js-cookie'
 Vue.use(Router);
 
 const routes = [
@@ -17,12 +16,6 @@ const routes = [
     name: "home",
     component: Home,
     meta: { title: "Home", auth: false }
-  },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: Dashboard,
-    meta: { title: "Dashboard", auth: true }
   },
   {
     path: "/signIn",
@@ -83,7 +76,7 @@ router.beforeEach((to, from, next) => {
     // otherwise are we already authenticated?
     if (store.getters["auth/isAuthenticated"]) {
       // yes we are, so off to dashboard
-      router.push({ name: "dashboard" });
+      router.push({ name: "getatt" });
       return;
     }
     next(); // route normally

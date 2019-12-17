@@ -71,9 +71,8 @@ export default {
         username: this.name,
         password: this.pass
       });
-
       if (!this.hasAuthenticationStatus) {
-        router.push("dashboard");
+        router.push("getatt");
       }
     }
   }

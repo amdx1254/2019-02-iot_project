@@ -1,10 +1,5 @@
-import Auth from "@aws-amplify/auth";
-import Amplify from "@aws-amplify/core";
 import axios from 'axios';
-
-const Logger = Amplify.Logger;
-Logger.LOG_LEVEL = "DEBUG"; // to show detailed logs from Amplify library
-const logger = new Logger("store:auth");
+import Cookies from 'js-cookie';
 
 // initial state
 const state = {
@@ -32,7 +27,7 @@ const getters = {
 
 const mutations = {
   setAuthenticationError(state, err) {
-    logger.debug("auth error: {}", err);
+    console.log("auth error: "+ err);
     state.authenticationStatus = {
       state: "failed",
       message: err.message,
@@ -46,7 +41,7 @@ const mutations = {
     state.user = user.user;
     state.idtoken = user.id_token;
     state.access_token = user.access_token;
-    state.authenticationStatus = user;
+    //state.authenticationStatus = user;
     state.isAuthenticated = true;
   },
   clearAuthentication(state) {
@@ -63,7 +58,7 @@ const actions = {
     context.commit("clearAuthenticationStatus", null);
   },
   signIn: async (context, params) => {
-    logger.debug("signIn for {}", params.username);
+    console.log("signIn for "+ params.username);
     context.commit("auth/clearAuthenticationStatus", null, { root: true });
     axios.defaults.headers.common['Authorization'] = undefined;
     axios.defaults.headers.common['access_token'] = undefined;
@@ -87,8 +82,8 @@ const actions = {
             access_token: res.data.data.access_token
           };
           console.log(user);
-          axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.data.id_token}`;
-          axios.defaults.headers.common['access_token'] = `${res.data.data.access_token}`;
+          Cookies.set('idtoken', res.data.data.id_token);
+          Cookies.set('access_token', res.data.data.access_token);
           context.commit("setUserAuthenticated", user);
         }
           
@@ -102,9 +97,11 @@ const actions = {
     try {
       axios.defaults.headers.common['Authorization'] = undefined
       axios.defaults.headers.common['access_token'] = undefined
+      Cookies.remove('idtoken');
+      Cookies.remove('access_token');
       await Auth.signOut();
     } catch (err) {
-      logger.error("error during sign out: {}", err);
+      console.log("error during sign out: " + err);
     }
     context.commit("auth/clearAuthentication", null, { root: true });
   }
